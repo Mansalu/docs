@@ -69,14 +69,14 @@ Create a new file in your favorite text editor
 
 Paste the following:
 
-  ```apiVersion: storage.k8s.io/v1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: csi-cvmfs-spt
     namespace: cvmfs
   provisioner: csi-cvmfsplugin
   parameters:
-  repository: spt.opensciencegrid.org```
+  repository: spt.opensciencegrid.org
 
 Create the SPT StorageClass in Kubernetes
 `kubectl create -f spt-storageclass.yaml`
@@ -85,4 +85,4 @@ Create the SPT StorageClass in Kubernetes
 
 The HTCondoor chart will automatically setup PVCs in the correct namespace. If you plan to use CVMFS outside of HTCondor you will need PVCs in the namespace where your application is running.
 
-`kubectl create -n <YOUR DESIRED NAMESPACE> -f pvcs/
+`kubectl create -n <YOUR DESIRED NAMESPACE> -f pvcs/`
