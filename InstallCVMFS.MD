@@ -48,7 +48,7 @@ Edit the configuration with your favorite text editor
 
 Simply replace FRONTIERSQUIDSERVICE with the IP of your squid service. 
 
-CVMFS_HTTP_PROXY="http://FRONTIERSQUIDSERVICE:3128"
+`CVMFS_HTTP_PROXY="http://FRONTIERSQUIDSERVICE:3128"`
 
 Save and exit.
 
