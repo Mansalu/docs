@@ -33,21 +33,27 @@ Everything should run in a namespace on your cluster called cvmfs.
 We'll use a configmap to mount the default.local configuration file the provisioner needs. You will need the IP of your squid proxy instance to do this. 
 
 Make sure you are in the `prp-osg-cvmfs/k8s/cvmfs` directory
+
 `cd prp-osg-cvmfs/k8s/cvmfs`
 
 Rename the template file
+
 `mv default.local.template default.local`
+
 Youre config file must be named `default.local` or you will get an error.
 
 Edit the configuration with your favorite text editor
+
 `vim default.local`
 
 Simply replace FRONTIERSQUIDSERVICE with the IP of your squid service. 
+
 CVMFS_HTTP_PROXY="http://FRONTIERSQUIDSERVICE:3128"
 
 Save and exit.
 
 Create the kubernetes config map from the default.local configuration file we just editted.
+
 `kubectl create configmap cvmfs-osg-config -n cvmfs --from-file=default.local`
 
 ## Deploy the Service Accounts
@@ -67,6 +73,7 @@ Again be sure you are working in the `prp-osg-cvmfs/k8s/cvmfs` directory.
 In order to use HTCondor in SLATE you will need to setup an additional StorageClass for SPT
 
 Create a new file in your favorite text editor 
+
 `vim spt-storageclass.yaml`
 
 Paste the following:
@@ -83,6 +90,7 @@ repository: spt.opensciencegrid.org
 ```
 
 Create the SPT StorageClass in Kubernetes
+
 `kubectl create -f spt-storageclass.yaml`
 
 ## OPTIONAL Create Persistent Volume Claims
