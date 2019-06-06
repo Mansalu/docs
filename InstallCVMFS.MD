@@ -69,6 +69,7 @@ Create a new file in your favorite text editor
 
 Paste the following:
 
+```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
@@ -77,6 +78,7 @@ Paste the following:
   provisioner: csi-cvmfsplugin
   parameters:
   repository: spt.opensciencegrid.org
+ ```
 
 Create the SPT StorageClass in Kubernetes
 `kubectl create -f spt-storageclass.yaml`
