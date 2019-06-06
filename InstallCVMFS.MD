@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
--Running SLATE Cluster 
+-A Running SLATE Cluster 
 
 -Kubectl access to your SLATE Cluster
 
