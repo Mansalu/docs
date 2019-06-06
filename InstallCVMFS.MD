@@ -4,7 +4,7 @@
 
 -Running SLATE Cluster 
 
--kubectl access to your SLATE Cluster
+-Kubectl access to your SLATE Cluster
 
 -A running instance of squid
 
