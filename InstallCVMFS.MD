@@ -1,4 +1,4 @@
-# How to Install CVMFS on SLATE a Cluster
+# How to Install CVMFS on a SLATE Cluster
 
 ## Prerequisites
 
