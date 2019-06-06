@@ -2,8 +2,10 @@
 
 ## Prerequisites
 
--Ruunning SLATE Cluster
+-Ruunning SLATE Cluster 
+
 -kubectl access to your SLATE Cluster
+
 -A running instance of squid
 
 ## How to get started with squid
@@ -70,15 +72,15 @@ Create a new file in your favorite text editor
 Paste the following:
 
 ```
-  apiVersion: storage.k8s.io/v1
-  kind: StorageClass
-  metadata:
-    name: csi-cvmfs-spt
-    namespace: cvmfs
-  provisioner: csi-cvmfsplugin
-  parameters:
-  repository: spt.opensciencegrid.org
- ```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: csi-cvmfs-spt
+  namespace: cvmfs
+provisioner: csi-cvmfsplugin
+parameters:
+repository: spt.opensciencegrid.org
+```
 
 Create the SPT StorageClass in Kubernetes
 `kubectl create -f spt-storageclass.yaml`
