@@ -40,7 +40,7 @@ Rename the template file
 
 `mv default.local.template default.local`
 
-Youre config file must be named `default.local` or you will get an error.
+Your config file must be named `default.local` or you will get an error.
 
 Edit the configuration with your favorite text editor
 
