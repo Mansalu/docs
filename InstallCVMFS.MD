@@ -95,6 +95,6 @@ Create the SPT StorageClass in Kubernetes
 
 ## OPTIONAL Create Persistent Volume Claims
 
-The HTCondoor chart will automatically setup PVCs in the correct namespace. If you plan to use CVMFS outside of HTCondor you will need PVCs in the namespace where your application is running.
+The HTCondor chart will automatically setup PVCs in the correct namespace. If you plan to use CVMFS outside of HTCondor you will need PVCs in the namespace where your application is running.
 
 `kubectl create -n <YOUR DESIRED NAMESPACE> -f pvcs/`
