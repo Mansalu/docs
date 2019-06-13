@@ -70,9 +70,13 @@ If you DO NOT see any services after running that command try to look at all the
 
 ## Getting the required YAML Manifests 
 
-`git clone https://github.com/sfiligoi/prp-osg-cvmfs`
+`git clone https://github.com/Mansalu/prp-osg-cvmfs.git`
 
-You'll want to use the master branch, and you can ignore the frontier related deployment files.
+You'll want to use the slate branch, and you can ignore the frontier related deployment files.
+
+`cd prp-osg-cvmfs`
+
+`git checkout slate`
 
 Everything you need is in `prp-osg-cvmfs/k8s/cvmfs`
 
@@ -123,29 +127,6 @@ Again be sure you are working in the `prp-osg-cvmfs/k8s/cvmfs` directory.
 ## Setup the StorageClasses
 
 `kubectl create -f storageclasses/`
-
-In order to use HTCondor in SLATE you will need to setup an additional StorageClass for SPT
-
-Create a new file in your favorite text editor 
-
-`vim spt-storageclass.yaml`
-
-Paste the following:
-
-```
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: csi-cvmfs-spt
-  namespace: cvmfs
-provisioner: csi-cvmfsplugin
-parameters:
-repository: spt.opensciencegrid.org
-```
-
-Create the SPT StorageClass in Kubernetes
-
-`kubectl create -f spt-storageclass.yaml`
 
 ## OPTIONAL Create Persistent Volume Claims
 
