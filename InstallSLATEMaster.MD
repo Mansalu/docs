@@ -40,7 +40,7 @@ With the correct network configuration, it is possible to pull and queue all fir
 
 Enter the Lifecycle Controller (reboot and press F10). Then click `Firmware Update` and `Launch Firmware Update`, choose `Network Share(CIFS or NIFS or HTTP or HTTPS Server)`. Select HTTPS and enter `downloads.dell.com` as the Share Name/Address. Also enter `catalog` as the File Path or Update Package Path. Click next and you should be able to choose each firmware update from a list.
 
-## Deploy the Operatinng System
+## Deploy the Operating System
 
 There are many ways to provide boot media to your server. You may choose to use iPXE, physical USB drive, physical DVD drive, or another method. I have used the virtual media feature of the iDRAC.
 
