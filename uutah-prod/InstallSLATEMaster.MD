@@ -115,7 +115,7 @@ pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
 
 Most of these details should be left to the local admin running the server. This is the proccess used to deploy uutah-prod.
 
-## System Configruation
+## System Configuration
 
 Following the documentation at https://slateci.io/docs/cluster/
 
