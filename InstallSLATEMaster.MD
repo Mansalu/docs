@@ -5,12 +5,19 @@ This page documents the installation of the SLATE cluster master on the SLATE Ma
 *VERSION INFO*
 
 *Hardware Dell PowerEdge R440*
+
 *Dell Service Tag 6Y37XQ2*
+
 *iDRAC Firmware Version 3.36.36.36*
+
 *BIOS Version 2.3.10*
+
 *CentOS 7.7.1908 x86_64*
+
 *Docker Version 19.03.3*
+
 *Kubernetes v1.16.1*
+
 *Server MGMT Hostname sl-ut-perfsonar-mgmt.chpc.utah.edu*
 
 ## Configure the iDRAC
