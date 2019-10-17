@@ -57,44 +57,39 @@ The system will reboot and land you in the installer. Configure the OS install t
 For my install I configured NTP with our local time servers and I setup the local timezone. I chose to do a network install using the CHPC mirror. I did manual partitioning of the single drive using lvm for the root partition. Finally I chose to turn off kdump and make a minimal install. 
 
 ```
-version=DEVEL
+#version=DEVEL
 # System authorization information
 auth --enableshadow --passalgo=sha512
 # Use graphical install
 graphical
 # Run the Setup Agent on first boot
 firstboot --enable
-ignoredisk --only-use=sda
+ignoredisk --only-use=sdb,nvme0n1,sda
 # Keyboard layouts
 keyboard --vckeymap=us --xlayouts='us'
 # System language
 lang en_US.UTF-8
 
 # Network information
-network  --bootproto=dhcp --device=em1 --ipv6=auto --activate
+network  --bootproto=dhcp --device=em1 --onboot=off --ipv6=auto --no-activate
 network  --bootproto=dhcp --device=em2 --onboot=off --ipv6=auto
-network  --bootproto=dhcp --device=p2p1 --onboot=off --ipv6=auto
-network  --bootproto=dhcp --device=p2p2 --onboot=off --ipv6=auto
-network  --hostname=sl-ut-perfsonar-mgmt.chpc.utah.edu
+network  --bootproto=dhcp --device=em3 --ipv6=auto --activate
+network  --bootproto=dhcp --device=em4 --onboot=off --ipv6=auto
+network  --hostname=sl-ut-knode-mgmt.chpc.utah.edu
 
 # Use network installation
 url --url="http://mirror.chpc.utah.edu/pub/centos/7.7.1908/os/x86_64"
 # Root password
-rootpw --iscrypted $6$yBPLaesr/cuqwhvw$mF3ixdRJFAdCbYBWnC3giYCCIFGQjIREMofJnlS6w9W1AulTgV.iyEOKyqyMohQQVXkxR8wE8oqEDFGzgL6P0.
+rootpw --iscrypted x
 # System services
 services --enabled="chronyd"
 # System timezone
 timezone America/Denver --isUtc --ntpservers=time1.chpc.utah.edu,time2.chpc.utah.edu,time3.chpc.utah.edu
 # System bootloader configuration
-bootloader --location=mbr --boot-drive=sda
+bootloader --location=mbr --boot-drive=sdb
+autopart --type=lvm
 # Partition clearing information
-clearpart --initlabel --list=sda3,sda2
-# Disk partitioning information
-part /boot/efi --fstype="efi" --noformat --onpart=sda1 --fsoptions="umask=0077,shortname=winnt"
-part /boot --fstype="xfs" --ondisk=sda --size=2048
-part pv.209 --fstype="lvmpv" --ondisk=sda --size=455557
-volgroup centos_sl-ut-perfsonar-mgmt00 --pesize=4096 pv.209
-logvol /  --fstype="xfs" --size=65536 --label="lv_root" --name=root --vgname=centos_sl-ut-perfsonar-mgmt00
+clearpart --all --initlabel --drives=sda,sdb,nvme0n1
 
 %packages
 @^minimal

@@ -4,9 +4,9 @@ This page documents the installation of the SLATE cluster master on the SLATE Ma
 
 *VERSION INFO*
 
-*Hardware Dell PowerEdge R440*
+*Hardware Dell PowerEdge R740xd*
 
-*Dell Service Tag 6Y37XQ2*
+*Dell Service Tag 50KCXQ2*
 
 *iDRAC Firmware Version 3.36.36.36*
 
@@ -78,7 +78,7 @@ network  --hostname=sl-ut-master-mgmt.chpc.utah.edu
 # Use network installation
 url --url="http://mirror.chpc.utah.edu/pub/centos/7.7.1908/os/x86_64"
 # Root password
-rootpw --iscrypted $6$yBPLaesr/cuqwhvw$mF3ixdRJFAdCbYBWnC3giYCCIFGQjIREMofJnlS6w9W1AulTgV.iyEOKyqyMohQQVXkxR8wE8oqEDFGzgL6P0.
+rootpw --iscrypted x
 # System services
 services --enabled="chronyd"
 # System timezone
