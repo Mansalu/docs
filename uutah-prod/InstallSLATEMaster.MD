@@ -18,7 +18,7 @@ This page documents the installation of the SLATE cluster master on the SLATE Ma
 
 *Kubernetes v1.16.1*
 
-*Server MGMT Hostname sl-ut-perfsonar-mgmt.chpc.utah.edu*
+*Server MGMT Hostname sl-ut-master-mgmt.chpc.utah.edu*
 
 ## Configure the iDRAC
 
@@ -73,7 +73,7 @@ network  --bootproto=dhcp --device=em1 --ipv6=auto --activate
 network  --bootproto=dhcp --device=em2 --onboot=off --ipv6=auto
 network  --bootproto=dhcp --device=p2p1 --onboot=off --ipv6=auto
 network  --bootproto=dhcp --device=p2p2 --onboot=off --ipv6=auto
-network  --hostname=sl-ut-perfsonar-mgmt.chpc.utah.edu
+network  --hostname=sl-ut-master-mgmt.chpc.utah.edu
 
 # Use network installation
 url --url="http://mirror.chpc.utah.edu/pub/centos/7.7.1908/os/x86_64"
@@ -91,8 +91,8 @@ clearpart --initlabel --list=sda3,sda2
 part /boot/efi --fstype="efi" --noformat --onpart=sda1 --fsoptions="umask=0077,shortname=winnt"
 part /boot --fstype="xfs" --ondisk=sda --size=2048
 part pv.209 --fstype="lvmpv" --ondisk=sda --size=455557
-volgroup centos_sl-ut-perfsonar-mgmt00 --pesize=4096 pv.209
-logvol /  --fstype="xfs" --size=65536 --label="lv_root" --name=root --vgname=centos_sl-ut-perfsonar-mgmt00
+volgroup centos_sl-ut-master-mgmt00 --pesize=4096 pv.209
+logvol /  --fstype="xfs" --size=65536 --label="lv_root" --name=root --vgname=centos_sl-ut-master-mgmt00
 
 %packages
 @^minimal
@@ -230,9 +230,9 @@ Next setup Calico which will act as our pod network.
 After approximately five minutes you should be able to see your Kubernetes master node is ready.
 
 ```
-[root@sl-ut-perfsonar-mgmt ~]# kubectl get nodes
+[root@sl-ut-master-mgmt ~]# kubectl get nodes
 NAME                                 STATUS   ROLES    AGE   VERSION
-sl-ut-perfsonar-mgmt.chpc.utah.edu   Ready    master   24m   v1.16.1
+sl-ut-master-mgmt.chpc.utah.edu   Ready    master   24m   v1.16.1
 ```
 
 If you want to schedule pods on your master node then you must remove the master node taint. This is needed for a single node cluster.  As uutah-prod is a larger cluster the master taint was left alone. 
