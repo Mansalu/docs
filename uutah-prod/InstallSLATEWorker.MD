@@ -54,7 +54,7 @@ Return to the Lifecycle Controller and go to `OS Deployment`. The management ser
 
 The system will reboot and land you in the installer. Configure the OS install to your liking. My Anaconda kickstart file can be found below, for reference on how drives, ntp, and other details were defined for uutah-prod. I reccomend you manuall configure drive partitions.
 
-For my install I configured NTP with our local time servers and I setup the local timezone. I chose to do a network install using the CHPC mirror. I did manual partitioning of the single drive using lvm for the root partition. Finally I chose to turn off kdump and make a minimal install. 
+For my install I configured NTP with our local time servers and I setup the local timezone. I chose to do a network install using the CHPC mirror. I did manual partitioning of the drives. I mounted `/` , `/boot`, and `/boot/efi` to the IDSDM. I mounted `/var` and `/home` to the NVME SSD. Finally I mounted the RAID disks to `/data`. Finally I chose to turn off kdump and make a minimal install. 
 
 ```
 #version=DEVEL

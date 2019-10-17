@@ -287,7 +287,7 @@ You can use the script here to install a token. I have omitted these commands fr
 ```
 curl -LO https://jenkins.slateci.io/artifacts/client/slate-linux.tar.gz
 tar xzf slate-linux.tar.gz
-sudo mv slate /usr/local/bin
+mv slate /usr/local/bin
 rm slate-linux.tar.gz
 ```
 
@@ -319,5 +319,15 @@ Run the following on the master node to get a full join command for that cluster
 
 `kubeadm create token --print-join-command`
 
-The proccess of deploying worker nodes for uutah-prod is documented at ***UPDATE***
+The proccess of deploying worker nodes for uutah-prod is documented at https://github.com/Mansalu/docs/blob/master/uutah-prod/InstallSLATEWorker.MD
+
+## OPTIONAL Enable Kubectl Shell Completion
+
+`yum install bash-completion`
+
+`_init_completion`
+
+`echo 'source <(kubectl completion bash)' >>~/.bashrc`
+
+Log back in, complete this for all users.
 
