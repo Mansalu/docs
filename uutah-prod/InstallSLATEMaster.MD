@@ -321,6 +321,18 @@ Run the following on the master node to get a full join command for that cluster
 
 The proccess of deploying worker nodes for uutah-prod is documented at https://github.com/Mansalu/docs/blob/master/uutah-prod/InstallSLATEWorker.MD
 
+## Add CVMFS to the Cluster
+
+This step is script based. There are some manual instructions available at https://github.com/Mansalu/docs/blob/master/InstallCVMFS.MD
+
+Run the script
+
+`git clone https://github.com/slateci/slate-scipts.git`
+
+`chmod +x slate-scripts/install-cvmfs.sh`
+
+`slate-scripts/install-cvmfs.sh`
+
 ## OPTIONAL Enable Kubectl Shell Completion
 
 `yum install bash-completion`
