@@ -1,6 +1,6 @@
-# Installation of SLATE Master
+# Installation of SLATE Worker (Edge Node)
 
-This page documents the installation of the SLATE cluster master on the SLATE Management Node reference hardware (https://slateci.io/docs/cluster/management-node.html). This document follows the installation of the uutah-prod cluster on 10-10-2019.
+This page documents the installation of the SLATE cluster worker on the SLATE Management Node reference hardware (https://slateci.io/docs/cluster/edge-node.html). This document follows the installation of the uutah-prod cluster on 10-10-2019.
 
 *VERSION INFO*
 
@@ -50,7 +50,7 @@ Download the latest CentOS 7 and verify the checksum. For this install CentOS 7.
 
 From the system's iDRAC navigate to `Configuration > Virtual Media` and click Connect Virtual Media. Browse for your verified CentOS ISO file, and click Map Device. Leave this interface open and Reboot your system.
 
-Return to the Lifecycle Controller and go to `OS Deployment`. The management servers do not contain additional drives by default, so we will not be configuring RAID. Click `Go Directly to OS Deployment`. The default settings on the next page should be fine, just select Red Hat Enterprise Linux 7.6 x64 from the list and click next. You should be able to select your Virtual CD from the media list and click next and finish on the next screen. The Lifecycle Controller may complain that it couldn't validate your boot media, this is fine as long as you verified the checksum yourself.
+Return to the Lifecycle Controller and go to `OS Deployment`. This server has several spinning disks and a RAID Controller. I configured all 8 drives in RAID 10 for now. The SSD is not in RAID, and the IDSDM is in a RAID 1 mirror by default. Click `Go Directly to OS Deployment`. The default settings on the next page should be fine, just select Red Hat Enterprise Linux 7.6 x64 from the list and click next. You should be able to select your Virtual CD from the media list and click next and finish on the next screen. The Lifecycle Controller may complain that it couldn't validate your boot media, this is fine as long as you verified the checksum yourself.
 
 The system will reboot and land you in the installer. Configure the OS install to your liking. My Anaconda kickstart file can be found below, for reference on how drives, ntp, and other details were defined for uutah-prod. I reccomend you manuall configure drive partitions.
 
@@ -197,3 +197,56 @@ Install Kubernetes: kubeadm is a tool used to bootstrap kubernetes clusters, kub
 Enable the kubelet system daemon.
 
 `systemctl enable --now kubelet`
+
+## Join this Node to the Cluster with Kubeadm
+
+**This portion details steps for a machine acting as a cluster worker**
+
+You will need the cluster's join token and discovery token. The best way to do this is to go on your *cluster master* and run:
+
+`kubeadm token create --print-join-command`
+
+This will print an entire command you can run on the edge node in order to join the node to your cluster. It will look similar to this:
+
+`kubeadm join <Master MGMT IP> --token <TOKEN> --discovery-token-ca-cert-hash <sha256:TOKEN>`
+
+Once this step is completed successfully your edge node is now a member of your SLATE Cluster!
+
+## OPTIONAL Add the SLATE Client for convenience
+
+Similar to on the master node.
+
+```
+curl -LO https://jenkins.slateci.io/artifacts/client/slate-linux.tar.gz
+tar xzf slate-linux.tar.gz
+mv slate /usr/local/bin
+rm slate-linux.tar.gz
+```
+
+Navigate to the slate portal to get your user specific token.
+
+https://portal.slateci.io/cli
+
+## OPTIONAL Enable Kubectl Access From the Edge Node
+
+If you want to be able to run kubectl commands from the edge node, you will need to add the KUBECONFIG for your user.
+
+Create the correct directory on your edge node.
+
+`mkdir -p $HOME/.kube`
+
+Then go to the master node, and copy the config over.
+
+`scp /etc/kubernetes/admin.conf mitchell@sl-ut-knode-mgmt.chpc.utah.edu:/home/mitchell/.kube/config`
+
+Complete this for any user account that needs kubectl.
+
+## OPTIONAL Enable Kubectl Shell Completion
+
+`yum install bash-completion`
+
+`_init_completion`
+
+`echo 'source <(kubectl completion bash)' >>~/.bashrc`
+
+Log back in, complete this for all users.
