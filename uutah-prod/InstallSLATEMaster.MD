@@ -221,7 +221,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 To enable kubeconfig for a single session instead simply run:
 
-`export $KUBECONFIG=/etc/kubernets/admin.conf`
+`export KUBECONFIG=/etc/kubernets/admin.conf`
 
 Next setup Calico which will act as our pod network.
 
@@ -330,6 +330,8 @@ Run the script
 `git clone https://github.com/slateci/slate-scipts.git`
 
 `chmod +x slate-scripts/install-cvmfs.sh`
+
+Edit the group and cluster name variables.
 
 `slate-scripts/install-cvmfs.sh`
 
