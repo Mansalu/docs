@@ -327,7 +327,7 @@ This step is script based. There are some manual instructions available at https
 
 Run the script
 
-`git clone https://github.com/slateci/slate-scipts.git`
+`git clone https://github.com/slateci/slate-scripts.git`
 
 `chmod +x slate-scripts/install-cvmfs.sh`
 
